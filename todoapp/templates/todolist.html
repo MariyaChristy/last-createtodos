@@ -1,0 +1,77 @@
+{%extends 'base.html'%}
+{%block body_block%}
+{%load static%}
+<div class="container">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4 text-centre mt-5">
+            <img src="{%static 'images/pro2.jpg'%}" class="rounded" alt="" height="80%">
+        </div>
+        <div class="col-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            {%if todos%}
+            <table class="table ">
+                <tr>
+                    <th>Task_name</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+
+                {%for todo in todos%}
+                <tr>
+                    <th>{{todo.task_name}}</th>
+                    <th> {{todo.status}}</th>
+                    <th> {{todo.create_date}}</th>
+                    <th>{{todo.user}}</th>
+                    <td>
+                        <a href="{%url 'todo-update' todo.id%}" class="btn btn-outline-warning">Edit</a>
+                        <a href="{%url 'todo-detail' todo.id%}" class="btn btn-outline-info">Detail</a>
+                        <a href="{%url 'remove-todo' todo.id %}" class="btn btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            {%endfor%}
+            </table>
+            {%else%}
+            <h2 class="text-danger">no todos</h2>
+            {%endif%}
+        </div>
+        <div class="col-4"></div>
+        <div class="row">
+            <div class="col-4"></div>
+              {%if todos%}
+        <h3 class="text-center btn btn-outline-info mt-5">Pending todos </h3>
+
+        <table>
+            <tr>
+                <td>Task_name</td>
+                <td>Status</td>
+                <td>Date</td>
+                <td>Action</td>
+            </tr>
+            {%for todo in todos%}
+            <tr>
+
+                <td>{{todo.task_name}}</td>
+                <td>{{todo.status}}</td>
+                <td>{{todo.created_date}}</td>
+                <td>{{todo.user}}</td>
+                <td>
+                    <a href="{%url 'todo-update' todo.id%}" class="text-center btn btn-outline-info">Edit</a>
+                </td>
+            </tr>
+            {%endfor%}
+            {%else%}
+            <h2 class="text-center"></h2>
+            {%endif%}
+        </table>
+
+    </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+</div>
+{%endblock%}
